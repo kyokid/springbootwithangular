@@ -1,8 +1,9 @@
 package com.example.demo.controller;
 
 
-import com.example.demo.entities.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.example.demo.entities.Customer;
 import com.example.demo.repositories.CustomerRepository;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.List;
 @RestController
 public class CustomerController {
 
-//    @Autowired
+    @Autowired
     CustomerRepository repository;
 
     @RequestMapping(value = "/customer", method = RequestMethod.GET)
@@ -34,7 +35,7 @@ public class CustomerController {
 
     @PostMapping(value = "/postcustomer")
     public Customer postCustomer(@RequestBody Customer customer) {
-        repository.save(new Customer(customer.getFirstName(), customer.getLastName()));
+        customer = repository.save(new Customer(customer.getFirstName(), customer.getLastName()));
         return customer;
     }
 

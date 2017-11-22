@@ -1,11 +1,14 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
+import com.example.demo.entities.Customer;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Transactional
+public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
     List<Customer> findByLastName(String lastName);
 }

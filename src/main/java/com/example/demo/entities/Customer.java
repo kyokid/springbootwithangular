@@ -11,13 +11,13 @@ public class Customer implements Serializable{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "firstName")
+    @Column(name = "firstname")
     private String firstName;
 
     @Column(name = "lastname")
     private String lastName;
 
-    protected Customer() {
+    public Customer() {
 
     }
 
@@ -49,9 +49,9 @@ public class Customer implements Serializable{
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    @Override
-    public String toString() {
-        return String.format("Customer=[id%d, firstName='%s', lastName='%s'");
-    }
+//
+//    @Override
+//    public String toString() {
+//        return String.format("Customer=[id%d, firstName='%s', lastName='%s'");
+//    }
 }
