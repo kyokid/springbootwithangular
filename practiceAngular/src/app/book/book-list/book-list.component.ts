@@ -22,7 +22,7 @@ export class BookListComponent implements OnInit {
   getAllBooks() {
     this.bookService.findAll().subscribe(
       books => {
-        this.books = books;
+        this.books = books.sort(function(a, b) {return a.id-b.id});
       },
       err => {
         console.log(err);

@@ -9,15 +9,16 @@ import { Observable} from "rxjs/Observable";
 @Injectable()
 export class BookService {
 
-  private readonly apiUrl = 'http://localhost:4200/api';
+  private readonly apiUrl = '/api/book';
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}/book`);
+    return this.http.get<Book[]>(`${this.apiUrl}/getAll`);
   }
 
-  findById(id: number): Observable<Book> {
-    return null;
+  getBook(id: number): Observable<Book> {
+    const url = `${this.apiUrl}/findone?title=${id}`;
+    return this.http.get<Book>(url);
   }
 
   saveBook(book: Book): Observable<Book> {

@@ -25,15 +25,17 @@
           <tr>
             <th>#</th>
             <th>Title</th>
-            <th>Over view</th>
+            <th>Overview</th>
             <th>Price</th>
             <th></th>
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let book of books">
-            <th scope="row">{{user.id}}</th>
-            <td>{{book.title}}</td>
+            <th scope="row">{{book.id}}</th>
+            <td>
+              <a routerLink="/book/detail/{{book.id}}"> {{book.title}}</a>
+            </td>
             <td>{{book.overview}}</td>
             <td>{{book.price}}</td>
             <td>
