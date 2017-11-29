@@ -33,4 +33,9 @@ export class BookDetailComponent implements OnInit {
     this.location.back();
   }
 
+  save(): void {
+    this.bookService.updateBook(this.book)
+        .subscribe(() => this.goBack())
+  }
+
 }

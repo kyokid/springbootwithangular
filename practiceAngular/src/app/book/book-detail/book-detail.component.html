@@ -3,8 +3,18 @@
     <div>
         <span>id: </span>{{book.id}}
     </div>
-    <label>title:
-        <input [(ngModel)]="book.title" placeholder="title">
-    </label>
+    <div>
+        <label>title:
+            <input [(ngModel)]="book.title" placeholder="title">
+        </label>
+        <label>overview:
+            <input [(ngModel)]="book.overview" placeholder="overview">
+        </label>
+        <label>price:
+            <input [(ngModel)]="book.price" placeholder="price">
+        </label>
+    </div>
+    <button (click)="save()">save</button>
+    <button (click)="goBack()">go back</button>
+
 </div>
-<button (click)="goBack()">go back</button>

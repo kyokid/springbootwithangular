@@ -82,4 +82,11 @@ public class BookEntity {
         this.overview = overview;
         this.price = price;
     }
+
+    public BookEntity(long id, String title, String overview, Double price) {
+        this.id = id;
+        this.title = title;
+        this.overview = overview;
+        this.price = price;
+    }
 }

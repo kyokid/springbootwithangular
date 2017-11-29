@@ -38,7 +38,7 @@ public class BookController {
     @PostMapping("/add")
     public BookEntity addBook(@RequestBody BookEntity bookEntity) {
 
-        bookEntity = bookRepository.save(new BookEntity(bookEntity.getTitle(), bookEntity.getOverview(), bookEntity.getPrice()));
+        bookEntity = bookRepository.save(new BookEntity(bookEntity.getId(), bookEntity.getTitle(), bookEntity.getOverview(), bookEntity.getPrice()));
         return bookEntity;
     }
 

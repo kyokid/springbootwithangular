@@ -1,36 +1,60 @@
-import { Injectable } from '@angular/core';
-import { Book } from "./book";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {Book} from "./book";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch';
-import { Observable} from "rxjs/Observable";
+import {Observable} from "rxjs/Observable";
+import {of} from "rxjs/observable/of";
+import {catchError} from "rxjs/operators";
 
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+}
 
 @Injectable()
 export class BookService {
 
-  private readonly apiUrl = '/api/book';
-  constructor(private http: HttpClient) { }
+    private readonly apiUrl = '/api/book';
 
-  findAll(): Observable<Book[]> {
-    return this.http.get<Book[]>(`${this.apiUrl}/getAll`);
-  }
+    constructor(private http: HttpClient) {
+    }
 
-  getBook(id: number): Observable<Book> {
-    const url = `${this.apiUrl}/findone?title=${id}`;
-    return this.http.get<Book>(url);
-  }
+    findAll(): Observable<Book[]> {
+        return this.http.get<Book[]>(`${this.apiUrl}/getAll`);
+    }
 
-  saveBook(book: Book): Observable<Book> {
-    return null;
-  }
+    getBook(id: number): Observable<Book> {
+        const url = `${this.apiUrl}/findone?id=${id}`;
+        return this.http.get<Book>(url);
+    }
 
-  deleteBookById(id: number): Observable<boolean> {
-    return null
-  }
+    addBook(book: Book): Observable<Book> {
+        const url = `${this.apiUrl}/add`
+        return this.http.post<Book>(url, book, httpOptions).pipe(
+            catchError(this.handleError<Book>('addBook'))
+        )
+    }
 
-  updateBook(book: Book): Observable<Book> {
-    return null;
-  }
+    deleteBookById(id: number): Observable<Book> {
+        const url = `${this.apiUrl}/delete/${id}`
 
+        return this.http.delete<Book>(url, httpOptions).pipe(
+            catchError(this.handleError<Book>('deleteBook'))
+        )
+    }
+
+    updateBook(book: Book): Observable<any> {
+        const url = `${this.apiUrl}/update/${book.id}`
+        console.warn(book)
+        return this.http.put(url, book, httpOptions).pipe(
+            catchError(this.handleError<any>('updateBook'))
+        );
+    }
+
+    private handleError<T>(operation = 'operation', result?: T) {
+        return (error: any): Observable<T> => {
+            console.error(error);
+            return of(result as T);
+        }
+    }
 }
